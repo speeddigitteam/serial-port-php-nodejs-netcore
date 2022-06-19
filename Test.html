@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .d-none {
+            display: none;
+        }
+        .d-block {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>ERP Software</h1>
+
+    <input type="number" class="form-control" name="weight" id="weightInput" placeholder="Weight">
+    <button type="button" id="connectButton">Connect/Refresh</button>
+    <div id="loading" class="d-none">Loading...</div>
+    <script>
+
+        const loading = document.getElementById('loading');
+        const connectButton = document.getElementById('connectButton');
+        const weightInput = document.getElementById('weightInput');
+
+        connectButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            loading.classList.add('d-block');
+            fetch('http://scale.test/read-scale.php')
+                .then(data => data.json())
+                .then(data => {
+                    const parsedData = JSON.parse(data);
+                    const amount = parsedData.amount;
+                    if(amount) {
+                        weightInput.value = amount
+                        loading.classList.remove('d-block');
+                    } else {
+                        weightInput.value = 0;
+                    }
+                })
+        });
+
+    </script>
+</body>
+
+</html>
