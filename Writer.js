@@ -5,16 +5,10 @@ const port = new SerialPort({
     baudRate: 9600
 });
 
-
-let i = 1200;
-let weight = {
-    amount: i 
-};
-
-// port.write(JSON.stringify(weight));
-
+let amount = 1200;
 setInterval(function() {
-    port.write(JSON.stringify(weight));
-    weight.amount += 1;
+    port.write(amount.toString() + "*");
+    amount += 1;
+
 }, 100);
 
