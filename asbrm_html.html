@@ -30,10 +30,11 @@
         connectButton.addEventListener('click', function (e) {
             e.preventDefault();
             loading.classList.add('d-block');
-            fetch('http://scale.test/read-scale.php')
+            fetch('http://s...content-available-to-author-only...e.test/index.php')
                 .then(data => data.json())
                 .then(data => {
-                    const parsedData = JSON.parse(data);
+                    console.log(data);
+                    const parsedData = data
                     const amount = parsedData.data;
                     if(amount) {
                         weightInput.value = amount
